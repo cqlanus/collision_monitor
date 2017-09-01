@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.dev.js",
+    "build-dev": "webpack -w --config webpack.dev.js",
     "start": "node server",
-    "start-server": "NODE_ENV='development' nodemon server -e html,js --ignore public"
+    "start-server": "NODE_ENV='development' nodemon server -e html,js --ignore public",
+    "start-dev": "npm run build-dev & npm run start-server"
   },
   "keywords": [],
   "author": "",
@@ -39,11 +42,16 @@
     "babel-preset-react-native": "^3.0.1",
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
+    "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.7",
     "file-loader": "^0.11.2",
     "mocha": "^3.5.0",
     "nodemon": "^1.11.0",
     "sinon": "^3.2.1",
-    "sinon-chai": "^2.13.0"
+    "sinon-chai": "^2.13.0",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1",
+    "webpack-merge": "^4.1.0"
   }
 }
