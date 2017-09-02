@@ -19,12 +19,12 @@ User.hasMany(Assessment);
 /* Observation Relationships */
 Observation.hasMany(Photo);
 Observation.hasMany(Comment);
-Observation.hasOne(Collision);
+// Observation.hasOne(Collision);
 Observation.belongsTo(Place);
 
 /* Collisision Relationships */
 Collision.hasMany(Assessment);
-Collision.belongsTo(Observation);
+Collision.hasMany(Observation);
 
 /* Assessment Relationships */
 Assessment.belongsTo(Severity);
