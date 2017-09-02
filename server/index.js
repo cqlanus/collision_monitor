@@ -54,7 +54,7 @@ const startListening = () => {
   const server = app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
 }
 
-const syncDb = () => db.sync();
+const syncDb = () => db.sync({});
 
 if (require.main === module) {
   sessionStore.sync()

@@ -5,6 +5,10 @@ const Message = db.define('message', {
   content: {
     type: Sequelize.TEXT,
     notNull: true
+  },
+  isRead: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 });
 

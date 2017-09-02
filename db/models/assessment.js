@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const Collision = db.define('collision', {
-  isAlive: {
+const Assessment = db.define('assessment', {
+  isExpert: {
     type: Sequelize.BOOLEAN,
     notNull: true
   }
-});
+})
 
-module.exports = Collision;
+module.exports = Assessment;
