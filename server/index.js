@@ -35,7 +35,7 @@ const createApp = () => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  // app.use('/api', require('./routes'));
+  app.use('/api', require('./routes'));
 
   app.use(express.static(path.join(__dirname, '..', 'public')));
 
@@ -54,7 +54,7 @@ const startListening = () => {
   const server = app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
 }
 
-const syncDb = () => db.sync({force: true});
+const syncDb = () => db.sync({});
 
 if (require.main === module) {
   sessionStore.sync()

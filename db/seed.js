@@ -15,12 +15,23 @@ const {
 
 const users = [
   {
+    firstName: 'Chris',
+    lastName: 'User',
     email: 'cqlanus@gmail.com',
     password: 'hello123'
   },
   {
+    firstName: 'Chris',
+    lastName: 'admin',
     email: 'cqlanus+01@gmail.com',
-    password: 'password123'
+    password: 'password123',
+    isAdmin: true
+  },
+  {
+    firstName: 'Shannon',
+    lastName: 'User',
+    email: 'cqlanus+02@gmail.com',
+    password: 'abc123'
   }
 ];
 
@@ -95,6 +106,27 @@ const observations = [
     collisionId: 3,
     isPublic: false
   }
+];
+
+const assessments = [
+  {
+    userId: 3,
+    isExpert: false,
+    collisionId: 1,
+    severityId: 2
+  },
+  {
+    userId: 2,
+    isExpert: true,
+    collisionId: 2,
+    severityId: 2
+  },
+  {
+    userId: 2,
+    isExpert: true,
+    collisionId: 1,
+    severityId: 1
+  }
 ]
 
 db.sync({ force: true })
@@ -121,6 +153,10 @@ db.sync({ force: true })
 .then(() => {
   console.log('added collisions, creating observations');
   return Promise.map(observations, observation => Observation.create(observation));
+})
+.then(() => {
+  console.log('added observations, creating assessments');
+  return Promise.map(assessments, assessment => Assessment.create(assessment));
 })
 .catch(err => console.error('problem', err))
 .finally(() => db.close())
