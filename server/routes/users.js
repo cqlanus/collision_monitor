@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const {User} = require('../../db/models');
+
+const { mustBeLoggedIn, forbidden, adminOnly } = require('../auth/filters');
 module.exports = router;
 
-router.get('/', (req, res, next) =>{
+router.get('/', mustBeLoggedIn, adminOnly('You must be admin'), (req, res, next) => {
   User.findAll({
     attributes: { exclude: ['password', 'salt'] }
   })
@@ -10,7 +12,7 @@ router.get('/', (req, res, next) =>{
   .catch(next)
 })
 
-router.get('/:userId', (req, res, next) => {
+router.get('/:userId', mustBeLoggedIn, (req, res, next) => {
   User.findOne({
     where: { id: req.params.userId },
     attributes: { exclude: ['password', 'salt'] }

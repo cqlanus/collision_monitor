@@ -1,10 +1,11 @@
 const router = require('express').Router();
-const {Observation} = require('../../db/models');
+const {Observation, Place, Collision, Photo, Comment} = require('../../db/models');
 module.exports = router;
 
 router.get('/', (req, res, next) =>{
   Observation.findAll({
-    attributes: { exclude: ['password', 'salt'] }
+    attributes: { exclude: ['password', 'salt'] },
+    include: [Collision, Place]
   })
   .then(observations => res.json(observations))
   .catch(next)

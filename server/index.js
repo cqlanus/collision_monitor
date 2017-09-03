@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 module.exports = app;
 
-// if (process.env.NODE_ENV !== 'production') require('../secrets');
+if (process.env.NODE_ENV !== 'production') require('../secrets');
 
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser((id, done) => {
@@ -35,6 +35,7 @@ const createApp = () => {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  app.use('/auth', require('./auth'));
   app.use('/api', require('./routes'));
 
   app.use(express.static(path.join(__dirname, '..', 'public')));
