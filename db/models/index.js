@@ -24,6 +24,7 @@ Observation.belongsTo(Place);
 
 /* Collisision Relationships */
 Collision.hasMany(Assessment);
+Collision.belongsTo(Species);
 // Collision.hasMany(Observation);
 
 /* Assessment Relationships */
