@@ -1,13 +1,10 @@
-const Promise = require('bluebird')
+const Promise = require('bluebird');
 const db = require('./db');
 const {
   User,
   Collision,
   Assessment,
-  Comment,
-  Message,
   Observation,
-  Photo,
   Place,
   Severity,
   Species
@@ -39,7 +36,7 @@ const species = [
   { name: 'Red-tailed hawk' },
   { name: 'House sparrow' },
   { name: 'American goldfinch' }
-]
+];
 
 const severities = [
   { magnitude: 'mild' },
@@ -127,36 +124,36 @@ const assessments = [
     collisionId: 1,
     severityId: 1
   }
-]
+];
 
 db.sync({ force: true })
-.then(() => {
-  console.log('old data dropped, now inserting users');
-  return Promise.map(users, user => User.create(user));
-})
-.then(() => {
-  console.log('added users, creating species');
-  return Promise.map(species, bird => Species.create(bird));
-})
-.then(() => {
-  console.log('added species, creating severities');
-  return Promise.map(severities, severity => Severity.create(severity));
-})
-.then(() => {
-  console.log('added severities, creating places');
-  return Promise.map(places, place => Place.create(place));
-})
-.then(() => {
-  console.log('added places, creating collisions');
-  return Promise.map(collisions, collision => Collision.create(collision));
-})
-.then(() => {
-  console.log('added collisions, creating observations');
-  return Promise.map(observations, observation => Observation.create(observation));
-})
-.then(() => {
-  console.log('added observations, creating assessments');
-  return Promise.map(assessments, assessment => Assessment.create(assessment));
-})
-.catch(err => console.error('problem', err))
-.finally(() => db.close())
+  .then(() => {
+    console.log('old data dropped, now inserting users');
+    return Promise.map(users, user => User.create(user));
+  })
+  .then(() => {
+    console.log('added users, creating species');
+    return Promise.map(species, bird => Species.create(bird));
+  })
+  .then(() => {
+    console.log('added species, creating severities');
+    return Promise.map(severities, severity => Severity.create(severity));
+  })
+  .then(() => {
+    console.log('added severities, creating places');
+    return Promise.map(places, place => Place.create(place));
+  })
+  .then(() => {
+    console.log('added places, creating collisions');
+    return Promise.map(collisions, collision => Collision.create(collision));
+  })
+  .then(() => {
+    console.log('added collisions, creating observations');
+    return Promise.map(observations, observation => Observation.create(observation));
+  })
+  .then(() => {
+    console.log('added observations, creating assessments');
+    return Promise.map(assessments, assessment => Assessment.create(assessment));
+  })
+  .catch(err => console.error('problem', err))
+  .finally(() => db.close());

@@ -31,23 +31,23 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   }
-})
+});
 
 module.exports = User;
 
 /* Instance Methods */
 User.prototype.correctPassword = function(pass) {
   return User.encryptPassword(pass, this.salt) === this.password;
-}
+};
 
 /* Class Methods */
 User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64');
-}
+};
 
 User.encryptPassword = function (plainText, salt) {
   return crypto.createHash('sha1').update(plainText).update(salt).digest('hex');
-}
+};
 
 /* Hooks */
 const setSaltAndPassword = user => {
@@ -55,7 +55,7 @@ const setSaltAndPassword = user => {
     user.salt = User.generateSalt();
     user.password = User.encryptPassword(user.password, user.salt);
   }
-}
+};
 
 User.beforeCreate(setSaltAndPassword);
 User.beforeUpdate(setSaltAndPassword);

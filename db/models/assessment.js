@@ -6,6 +6,6 @@ const Assessment = db.define('assessment', {
     type: Sequelize.BOOLEAN,
     notNull: true
   }
-})
+});
 
 module.exports = Assessment;

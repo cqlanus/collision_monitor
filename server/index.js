@@ -16,8 +16,8 @@ if (process.env.NODE_ENV !== 'production') require('../secrets');
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser((id, done) => {
   return db.models.user.findById(id)
-  .then(user => done(null, user))
-  .catch(done)
+    .then(user => done(null, user))
+    .catch(done);
 });
 
 const createApp = () => {
@@ -31,7 +31,7 @@ const createApp = () => {
     store: sessionStore,
     resave: false,
     saveUninitialized: false
-  }))
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -48,20 +48,20 @@ const createApp = () => {
     console.error(err);
     console.error(err.stack);
     res.status(err.status || 500).send(err.message || 'Internal server error.');
-  })
-}
+  });
+};
 
 const startListening = () => {
   const server = app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
-}
+};
 
 const syncDb = () => db.sync({});
 
 if (require.main === module) {
   sessionStore.sync()
-  .then(syncDb)
-  .then(createApp)
-  .then(startListening)
+    .then(syncDb)
+    .then(createApp)
+    .then(startListening);
 } else {
   createApp();
 }
